@@ -126,5 +126,19 @@ namespace DInTaskSchedulerApi.Tools
                 KeyCode = model.Type
             };
         }
+
+        /// <summary>
+        /// Format SpecialFunction model to SpecialFunctionViewModel
+        /// </summary>
+        public static SpecialFunctionViewModel FormatSpecialFunctionModel(SpecialFunction model)
+        {
+            return new SpecialFunctionViewModel()
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Description = model.Description,
+                PropertyType = model.IdPropertyTypeNavigation != null ? FormatPropertyTypeCatalogModel(model.IdPropertyTypeNavigation) : null
+            };
+        }
     }
 }

@@ -124,6 +124,7 @@ namespace DInTaskSchedulerApi
             services.AddTransient<IParameterTypeRepository, ParameterTypeRepository>();
             services.AddTransient<IRequestTypeRepository, RequestTypeRepository>();
             services.AddTransient<IPropertyTypeRepository, PropertyTypeRepository>();
+            services.AddTransient<ISpecialFunctionRepository, SpecialFunctionRepository>();
         }
 
         /// <summary>
@@ -138,6 +139,7 @@ namespace DInTaskSchedulerApi
             services.AddTransient<IParameterTypeService, ParameterTypeService>();
             services.AddTransient<IRequestTypeService, RequestTypeService>();
             services.AddTransient<IPropertyTypeService, PropertyTypeService>();
+            services.AddTransient<ISpecialFunctionService, SpecialFunctionService>();
         }
 
         /// <summary>

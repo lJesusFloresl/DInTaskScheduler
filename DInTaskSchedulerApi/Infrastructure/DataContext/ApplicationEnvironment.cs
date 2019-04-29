@@ -18,6 +18,7 @@ namespace DInTaskSchedulerApi.Infrastructure.DataContext
         public string ApiKey { get; set; }
         public string SecretKey { get; set; }
         public string EndpointUrlBase { get; set; }
+        public string UrlEndpointLogin { get; set; }
 
         public Application IdApplicationNavigation { get; set; }
         public Environment IdEnvironmentNavigation { get; set; }

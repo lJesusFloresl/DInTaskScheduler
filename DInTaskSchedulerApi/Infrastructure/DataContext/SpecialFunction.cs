@@ -15,6 +15,7 @@ namespace DInTaskSchedulerApi.Infrastructure.DataContext
         public string Description { get; set; }
         public int IdPropertyType { get; set; }
 
+        public PropertyType IdPropertyTypeNavigation { get; set; }
         public ICollection<JobParameter> JobParameter { get; set; }
     }
 }

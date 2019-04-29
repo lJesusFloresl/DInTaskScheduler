@@ -65,6 +65,8 @@ namespace DInTaskSchedulerApi.Infrastructure.DataContext
                     .IsRequired()
                     .HasMaxLength(50);
 
+                entity.Property(e => e.UrlEndpointLogin).HasMaxLength(500);
+
                 entity.HasOne(d => d.IdApplicationNavigation)
                     .WithMany(p => p.ApplicationEnvironment)
                     .HasForeignKey(d => d.IdApplication)
@@ -254,6 +256,12 @@ namespace DInTaskSchedulerApi.Infrastructure.DataContext
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(100);
+
+                entity.HasOne(d => d.IdPropertyTypeNavigation)
+                    .WithMany(p => p.SpecialFunction)
+                    .HasForeignKey(d => d.IdPropertyType)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SpecialFunction_PropertyType");
             });
 
             modelBuilder.Entity<Status>(entity =>

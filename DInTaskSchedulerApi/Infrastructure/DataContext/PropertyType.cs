@@ -8,6 +8,7 @@ namespace DInTaskSchedulerApi.Infrastructure.DataContext
         public PropertyType()
         {
             JobParameter = new HashSet<JobParameter>();
+            SpecialFunction = new HashSet<SpecialFunction>();
         }
 
         public int Id { get; set; }
@@ -15,5 +16,6 @@ namespace DInTaskSchedulerApi.Infrastructure.DataContext
         public string Type { get; set; }
 
         public ICollection<JobParameter> JobParameter { get; set; }
+        public ICollection<SpecialFunction> SpecialFunction { get; set; }
     }
 }
