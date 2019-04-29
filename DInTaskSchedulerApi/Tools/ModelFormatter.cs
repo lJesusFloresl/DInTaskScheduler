@@ -74,5 +74,18 @@ namespace DInTaskSchedulerApi.Tools
 
             return modelDB;
         }
+
+        /// <summary>
+        /// Format Frequency model to CatalogViewModel
+        /// </summary>
+        public static CatalogViewModel FormatFrequencyCatalogModel(Frequency model)
+        {
+            return new CatalogViewModel()
+            {
+                Id = model.Id,
+                Name = model.Name,
+                KeyCode = string.Empty
+            };
+        }
     }
 }

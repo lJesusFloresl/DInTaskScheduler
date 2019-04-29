@@ -120,6 +120,7 @@ namespace DInTaskSchedulerApi
             services.AddTransient<IStatusRepository, StatusRepository>();
             services.AddTransient<IEnvironmentRepository, EnvironmentRepository>();
             services.AddTransient<IApplicationRepository, ApplicationRepository>();
+            services.AddTransient<IFrequencyRepository, FrequencyRepository>();
         }
 
         /// <summary>
@@ -130,6 +131,7 @@ namespace DInTaskSchedulerApi
             services.AddTransient<IStatusService, StatusService>();
             services.AddTransient<IEnvironmentService, EnvironmentService>();
             services.AddTransient<IApplicationService, ApplicationService>();
+            services.AddTransient<IFrequencyService, FrequencyService>();
         }
 
         /// <summary>
