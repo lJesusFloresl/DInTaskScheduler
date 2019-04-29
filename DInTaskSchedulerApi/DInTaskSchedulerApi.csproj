@@ -13,13 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\Services\" />
-    <Folder Include="Domain\Contracts\Services\" />
-    <Folder Include="Domain\Contracts\Repositories\" />
     <Folder Include="Domain\Entities\" />
     <Folder Include="Infrastructure\AmbientContext\" />
     <Folder Include="Infrastructure\DataContext\" />
-    <Folder Include="Infrastructure\Repositories\" />
     <Folder Include="Templates\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>

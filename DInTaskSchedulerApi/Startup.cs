@@ -2,7 +2,11 @@
 using System.Reflection;
 using System.Text;
 using DInTaskSchedulerApi.Application.Configurations;
+using DInTaskSchedulerApi.Application.Services;
+using DInTaskSchedulerApi.Domain.Contracts.Repositories;
+using DInTaskSchedulerApi.Domain.Contracts.Services;
 using DInTaskSchedulerApi.Infrastructure.DataContext;
+using DInTaskSchedulerApi.Infrastructure.Repositories;
 using DInTaskSchedulerApi.Tools;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -113,7 +117,9 @@ namespace DInTaskSchedulerApi
         /// </summary>
         private void AddRepositories(IServiceCollection services)
         {
-            //services.AddTransient<IClassRepository, ClassRepository>();
+            services.AddTransient<IStatusRepository, StatusRepository>();
+            services.AddTransient<IEnvironmentRepository, EnvironmentRepository>();
+            services.AddTransient<IApplicationRepository, ApplicationRepository>();
         }
 
         /// <summary>
@@ -121,7 +127,9 @@ namespace DInTaskSchedulerApi
         /// </summary>
         private void AddServices(IServiceCollection services)
         {
-            //services.AddTransient<IClassService, ClassService>();
+            services.AddTransient<IStatusService, StatusService>();
+            services.AddTransient<IEnvironmentService, EnvironmentService>();
+            services.AddTransient<IApplicationService, ApplicationService>();
         }
 
         /// <summary>

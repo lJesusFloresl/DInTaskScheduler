@@ -1,4 +1,5 @@
 ﻿using DInTaskSchedulerApi.Domain.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -6,6 +7,12 @@ using System.Net;
 
 namespace DInTaskSchedulerApi.Controllers
 {
+    /// <summary>
+    /// Define all global methods from controllers
+    /// </summary>
+    //[Authorize]
+    [AllowAnonymous]
+    [ApiController]
     public class BaseController : ControllerBase
     {
         /// <summary>

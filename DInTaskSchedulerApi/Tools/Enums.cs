@@ -7,24 +7,19 @@ namespace DInTaskSchedulerApi.Tools
     /// </summary>
     public static class Enums
     {
+        public enum ApiEnvironment
+        {
+            [Description("Local")]
+            LOCAL = 1,
+            [Description("QA")]
+            QA = 2,
+            [Description("Production")]
+            PRODUCTION = 3
+        }
+
         public enum EmailEmbeddedResourceType
         {
             IMAGE = 1
-        }
-
-        public enum PayForms
-        {
-            CASH = 1,
-            CARD = 2,
-            TRANSFER = 3
-        }
-
-        public enum Genders
-        {
-            [Description("M")]
-            MALE = 1,
-            [Description("F")]
-            FEMALE = 2
         }
 
         public enum Months
@@ -41,6 +36,12 @@ namespace DInTaskSchedulerApi.Tools
             OCT = 10,
             NOV = 11,
             DEC = 12
+        }
+
+        public enum StatusCatalog
+        {
+            ACTIVE = 1,
+            INACTIVE = 2
         }
     }
 }
