@@ -100,5 +100,18 @@ namespace DInTaskSchedulerApi.Tools
                 KeyCode = string.Empty
             };
         }
+
+        /// <summary>
+        /// Format RequestType model to CatalogViewModel
+        /// </summary>
+        public static CatalogViewModel FormatRequestTypeCatalogModel(RequestType model)
+        {
+            return new CatalogViewModel()
+            {
+                Id = model.Id,
+                Name = model.Name,
+                KeyCode = string.Empty
+            };
+        }
     }
 }
