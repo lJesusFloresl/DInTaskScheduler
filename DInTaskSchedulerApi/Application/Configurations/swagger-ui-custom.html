@@ -1,0 +1,159 @@
+﻿<!-- HTML for static distribution bundle build -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<title>%(DocumentTitle)</title>-->
+    <title>DIBrave Task Scheduler Swagger UI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./swagger-ui.css">
+    <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16" />
+    <style>
+        html {
+            box-sizing: border-box;
+            overflow: -moz-scrollbars-vertical;
+            overflow-y: scroll;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        body {
+            margin: 0;
+            background: #fafafa;
+        }
+
+        /* Comienza customizacion de Swagger-UI */
+
+        .swagger-ui .topbar {
+            background-color: #344955;
+            border-bottom: 3px solid white;
+        }
+
+            .swagger-ui .topbar .download-url-wrapper .select-label span {
+                color: white;
+            }
+
+            .swagger-ui .topbar .download-url-wrapper .select-label select {
+                border: 2px solid white;
+            }
+
+        /*.swagger-ui .opblock.opblock-get,
+        .swagger-ui .opblock.opblock-post,
+        .swagger-ui .opblock.opblock-put,
+        .swagger-ui .opblock.opblock-delete {
+            border-color: #344955;
+        }*/
+
+        /*.swagger-ui .opblock .opblock-summary-operation-id, .swagger-ui .opblock .opblock-summary-path,
+        .swagger-ui .opblock .opblock-summary-description {
+            color: white;
+        }*/
+
+        /*.swagger-ui .opblock.opblock-get .opblock-summary,
+        .swagger-ui .opblock.opblock-post .opblock-summary,
+        .swagger-ui .opblock.opblock-put .opblock-summary,
+        .swagger-ui .opblock.opblock-delete .opblock-summary {
+            background: #344955;
+        }*/
+
+        /*.swagger-ui .opblock.opblock-get,
+        .swagger-ui .opblock.opblock-post,
+        .swagger-ui .opblock.opblock-put,
+        .swagger-ui .opblock.opblock-delete {
+            background: none;
+        }*/
+
+        /* Termina customizacion de Swagger-UI */
+    </style>
+    %(HeadContent)
+</head>
+
+<body>
+
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position:absolute;width:0;height:0">
+        <defs>
+            <symbol viewBox="0 0 20 20" id="unlocked">
+                <path d="M15.8 8H14V5.6C14 2.703 12.665 1 10 1 7.334 1 6 2.703 6 5.6V6h2v-.801C8 3.754 8.797 3 10 3c1.203 0 2 .754 2 2.199V8H4c-.553 0-1 .646-1 1.199V17c0 .549.428 1.139.951 1.307l1.197.387C5.672 18.861 6.55 19 7.1 19h5.8c.549 0 1.428-.139 1.951-.307l1.196-.387c.524-.167.953-.757.953-1.306V9.199C17 8.646 16.352 8 15.8 8z"></path>
+            </symbol>
+
+            <symbol viewBox="0 0 20 20" id="locked">
+                <path d="M15.8 8H14V5.6C14 2.703 12.665 1 10 1 7.334 1 6 2.703 6 5.6V8H4c-.553 0-1 .646-1 1.199V17c0 .549.428 1.139.951 1.307l1.197.387C5.672 18.861 6.55 19 7.1 19h5.8c.549 0 1.428-.139 1.951-.307l1.196-.387c.524-.167.953-.757.953-1.306V9.199C17 8.646 16.352 8 15.8 8zM12 8H8V5.199C8 3.754 8.797 3 10 3c1.203 0 2 .754 2 2.199V8z" />
+            </symbol>
+
+            <symbol viewBox="0 0 20 20" id="close">
+                <path d="M14.348 14.849c-.469.469-1.229.469-1.697 0L10 11.819l-2.651 3.029c-.469.469-1.229.469-1.697 0-.469-.469-.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-.469-.469-.469-1.228 0-1.697.469-.469 1.228-.469 1.697 0L10 8.183l2.651-3.031c.469-.469 1.228-.469 1.697 0 .469.469.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c.469.469.469 1.229 0 1.698z" />
+            </symbol>
+
+            <symbol viewBox="0 0 20 20" id="large-arrow">
+                <path d="M13.25 10L6.109 2.58c-.268-.27-.268-.707 0-.979.268-.27.701-.27.969 0l7.83 7.908c.268.271.268.709 0 .979l-7.83 7.908c-.268.271-.701.27-.969 0-.268-.269-.268-.707 0-.979L13.25 10z" />
+            </symbol>
+
+            <symbol viewBox="0 0 20 20" id="large-arrow-down">
+                <path d="M17.418 6.109c.272-.268.709-.268.979 0s.271.701 0 .969l-7.908 7.83c-.27.268-.707.268-.979 0l-7.908-7.83c-.27-.268-.27-.701 0-.969.271-.268.709-.268.979 0L10 13.25l7.418-7.141z" />
+            </symbol>
+
+            <symbol viewBox="0 0 24 24" id="jump-to">
+                <path d="M19 7v4H5.83l3.58-3.59L8 6l-6 6 6 6 1.41-1.41L5.83 13H21V7z" />
+            </symbol>
+
+            <symbol viewBox="0 0 24 24" id="expand">
+                <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" />
+            </symbol>
+
+        </defs>
+    </svg>
+
+    <div id="swagger-ui"></div>
+
+    <!-- Workaround for https://github.com/swagger-api/swagger-editor/issues/1371 -->
+    <script>
+        if (window.navigator.userAgent.indexOf("Edge") > -1) {
+            console.log("Removing native Edge fetch in favor of swagger-ui's polyfill");
+            window.fetch = undefined;
+        }
+    </script>
+
+    <script src="./swagger-ui-bundle.js"></script>
+    <script src="./swagger-ui-standalone-preset.js"></script>
+    <script>
+        window.onload = function () {
+            var configObject = JSON.parse('%(ConfigObject)');
+            var oauthConfigObject = JSON.parse('%(OAuthConfigObject)');
+
+            // Apply mandatory parameters
+            configObject.dom_id = "#swagger-ui";
+            configObject.presets = [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset];
+            configObject.layout = "StandaloneLayout";
+
+            // If oauth2RedirectUrl isn't specified, use the built-in default
+            if (!configObject.hasOwnProperty("oauth2RedirectUrl"))
+                configObject.oauth2RedirectUrl = window.location.href.replace("index.html", "oauth2-redirect.html");
+
+            // Build a system
+            const ui = SwaggerUIBundle(configObject);
+
+            // Apply OAuth config
+            ui.initOAuth(oauthConfigObject);
+
+            /* Comienza customizacion de Swagger-UI */
+
+            let etiqueta = 'DIBrave Task Scheduler Services';
+            let linkSwagger = document.getElementsByClassName('link')[0];
+            let imagen = linkSwagger.childNodes[0];
+            let leyenda = linkSwagger.childNodes[1];
+            imagen.setAttribute('alt', etiqueta);
+            leyenda.innerHTML = etiqueta;
+            imagen.setAttribute('src', 'data:image/png;base64,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');
+
+            /* Termina customizacion de Swagger-UI */
+        };
+    </script>
+</body>
+
+</html>
