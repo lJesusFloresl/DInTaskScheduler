@@ -1,0 +1,1044 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DInTaskSchedulerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="IdStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ApplicationEnvironment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdApplication" Type="int" Nullable="false" />
+          <Property Name="IdEnvironment" Type="int" Nullable="false" />
+          <Property Name="EndpointUrlInfo" Type="nvarchar" MaxLength="500" />
+          <Property Name="IdStatus" Type="int" Nullable="false" />
+          <Property Name="ApiKey" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SecretKey" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EndpointUrlBase" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="UrlEndpointLogin" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Environment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Frequency">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="300" />
+          <Property Name="Endpoint" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="HourExecution" Type="time" Precision="7" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="datetime" Nullable="false" />
+          <Property Name="IdStatus" Type="int" Nullable="false" />
+          <Property Name="IdFrequency" Type="int" Nullable="false" />
+          <Property Name="IdRequestType" Type="int" Nullable="false" />
+          <Property Name="Monday" Type="bit" Nullable="false" />
+          <Property Name="Tuesday" Type="bit" Nullable="false" />
+          <Property Name="Wednesday" Type="bit" Nullable="false" />
+          <Property Name="Thursday" Type="bit" Nullable="false" />
+          <Property Name="Friday" Type="bit" Nullable="false" />
+          <Property Name="Saturday" Type="bit" Nullable="false" />
+          <Property Name="Sunday" Type="bit" Nullable="false" />
+          <Property Name="IdApplicationEnvironment" Type="int" Nullable="false" />
+          <Property Name="UseAuthentication" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobExecution">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExecutionDateTime" Type="datetime" Nullable="false" />
+          <Property Name="IdJob" Type="int" Nullable="false" />
+          <Property Name="IsSuccess" Type="bit" Nullable="false" />
+          <Property Name="UrlEndpoint" Type="nvarchar" MaxLength="300" />
+          <Property Name="Data" Type="nvarchar(max)" />
+          <Property Name="Response" Type="nvarchar(max)" />
+          <Property Name="InitDateTime" Type="datetime" />
+          <Property Name="EndDateTime" Type="datetime" />
+          <Property Name="InProcess" Type="bit" Nullable="false" />
+          <Property Name="Finished" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobNotification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdJob" Type="int" Nullable="false" />
+          <Property Name="Mail" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobParameter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PropertyName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdPropertyType" Type="int" Nullable="false" />
+          <Property Name="IdJob" Type="int" Nullable="false" />
+          <Property Name="IdSpecialFunction" Type="int" />
+          <Property Name="IdParameterType" Type="int" Nullable="false" />
+          <Property Name="IdJobParameter" Type="int" />
+          <Property Name="Value" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ParameterType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PropertyType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RequestType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApplicationName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ApiKey" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SecretKey" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Version" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="SpecialFunction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="IdPropertyType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Application_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Application" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApplicationEnvironment_Application">
+          <End Role="Application" Type="Self.Application" Multiplicity="1" />
+          <End Role="ApplicationEnvironment" Type="Self.ApplicationEnvironment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApplicationEnvironment">
+              <PropertyRef Name="IdApplication" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApplicationEnvironment_Environment">
+          <End Role="Environment" Type="Self.Environment" Multiplicity="1" />
+          <End Role="ApplicationEnvironment" Type="Self.ApplicationEnvironment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Environment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApplicationEnvironment">
+              <PropertyRef Name="IdEnvironment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApplicationEnvironment_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="ApplicationEnvironment" Type="Self.ApplicationEnvironment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApplicationEnvironment">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_ApplicationEnvironment">
+          <End Role="ApplicationEnvironment" Type="Self.ApplicationEnvironment" Multiplicity="1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationEnvironment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="IdApplicationEnvironment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Frequency">
+          <End Role="Frequency" Type="Self.Frequency" Multiplicity="1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Frequency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="IdFrequency" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_RequestType">
+          <End Role="RequestType" Type="Self.RequestType" Multiplicity="1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RequestType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="IdRequestType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobExecution_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="JobExecution" Type="Self.JobExecution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobExecution">
+              <PropertyRef Name="IdJob" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobNotification_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="JobNotification" Type="Self.JobNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobNotification">
+              <PropertyRef Name="IdJob" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobParameter_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="JobParameter" Type="Self.JobParameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobParameter">
+              <PropertyRef Name="IdJob" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobParameter_ParameterType">
+          <End Role="ParameterType" Type="Self.ParameterType" Multiplicity="1" />
+          <End Role="JobParameter" Type="Self.JobParameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParameterType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobParameter">
+              <PropertyRef Name="IdParameterType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobParameter_PropertyType">
+          <End Role="PropertyType" Type="Self.PropertyType" Multiplicity="1" />
+          <End Role="JobParameter" Type="Self.JobParameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobParameter">
+              <PropertyRef Name="IdPropertyType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobParameter_SpecialFunction">
+          <End Role="SpecialFunction" Type="Self.SpecialFunction" Multiplicity="0..1" />
+          <End Role="JobParameter" Type="Self.JobParameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SpecialFunction">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobParameter">
+              <PropertyRef Name="IdSpecialFunction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpecialFunction_PropertyType">
+          <End Role="PropertyType" Type="Self.PropertyType" Multiplicity="1" />
+          <End Role="SpecialFunction" Type="Self.SpecialFunction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SpecialFunction">
+              <PropertyRef Name="IdPropertyType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DInTaskSchedulerModelStoreContainer">
+          <EntitySet Name="Application" EntityType="Self.Application" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApplicationEnvironment" EntityType="Self.ApplicationEnvironment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Environment" EntityType="Self.Environment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Frequency" EntityType="Self.Frequency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Job" EntityType="Self.Job" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobExecution" EntityType="Self.JobExecution" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobNotification" EntityType="Self.JobNotification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobParameter" EntityType="Self.JobParameter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ParameterType" EntityType="Self.ParameterType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PropertyType" EntityType="Self.PropertyType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RequestType" EntityType="Self.RequestType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SpecialFunction" EntityType="Self.SpecialFunction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Application_Status" Association="Self.FK_Application_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Application" EntitySet="Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApplicationEnvironment_Application" Association="Self.FK_ApplicationEnvironment_Application">
+            <End Role="Application" EntitySet="Application" />
+            <End Role="ApplicationEnvironment" EntitySet="ApplicationEnvironment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApplicationEnvironment_Environment" Association="Self.FK_ApplicationEnvironment_Environment">
+            <End Role="Environment" EntitySet="Environment" />
+            <End Role="ApplicationEnvironment" EntitySet="ApplicationEnvironment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApplicationEnvironment_Status" Association="Self.FK_ApplicationEnvironment_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="ApplicationEnvironment" EntitySet="ApplicationEnvironment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_ApplicationEnvironment" Association="Self.FK_Job_ApplicationEnvironment">
+            <End Role="ApplicationEnvironment" EntitySet="ApplicationEnvironment" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Frequency" Association="Self.FK_Job_Frequency">
+            <End Role="Frequency" EntitySet="Frequency" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_RequestType" Association="Self.FK_Job_RequestType">
+            <End Role="RequestType" EntitySet="RequestType" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Status" Association="Self.FK_Job_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobExecution_Job" Association="Self.FK_JobExecution_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="JobExecution" EntitySet="JobExecution" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobNotification_Job" Association="Self.FK_JobNotification_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="JobNotification" EntitySet="JobNotification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobParameter_Job" Association="Self.FK_JobParameter_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="JobParameter" EntitySet="JobParameter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobParameter_ParameterType" Association="Self.FK_JobParameter_ParameterType">
+            <End Role="ParameterType" EntitySet="ParameterType" />
+            <End Role="JobParameter" EntitySet="JobParameter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobParameter_PropertyType" Association="Self.FK_JobParameter_PropertyType">
+            <End Role="PropertyType" EntitySet="PropertyType" />
+            <End Role="JobParameter" EntitySet="JobParameter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobParameter_SpecialFunction" Association="Self.FK_JobParameter_SpecialFunction">
+            <End Role="SpecialFunction" EntitySet="SpecialFunction" />
+            <End Role="JobParameter" EntitySet="JobParameter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpecialFunction_PropertyType" Association="Self.FK_SpecialFunction_PropertyType">
+            <End Role="PropertyType" EntitySet="PropertyType" />
+            <End Role="SpecialFunction" EntitySet="SpecialFunction" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DInTaskSchedulerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdStatus" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_Application_Status" FromRole="Application" ToRole="Status" />
+          <NavigationProperty Name="ApplicationEnvironment" Relationship="Self.FK_ApplicationEnvironment_Application" FromRole="Application" ToRole="ApplicationEnvironment" />
+        </EntityType>
+        <EntityType Name="ApplicationEnvironment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdApplication" Type="Int32" Nullable="false" />
+          <Property Name="IdEnvironment" Type="Int32" Nullable="false" />
+          <Property Name="EndpointUrlInfo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IdStatus" Type="Int32" Nullable="false" />
+          <Property Name="ApiKey" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SecretKey" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EndpointUrlBase" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UrlEndpointLogin" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Application" Relationship="Self.FK_ApplicationEnvironment_Application" FromRole="ApplicationEnvironment" ToRole="Application" />
+          <NavigationProperty Name="Environment" Relationship="Self.FK_ApplicationEnvironment_Environment" FromRole="ApplicationEnvironment" ToRole="Environment" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_ApplicationEnvironment_Status" FromRole="ApplicationEnvironment" ToRole="Status" />
+          <NavigationProperty Name="Job" Relationship="Self.FK_Job_ApplicationEnvironment" FromRole="ApplicationEnvironment" ToRole="Job" />
+        </EntityType>
+        <EntityType Name="Environment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ApplicationEnvironment" Relationship="Self.FK_ApplicationEnvironment_Environment" FromRole="Environment" ToRole="ApplicationEnvironment" />
+        </EntityType>
+        <EntityType Name="Frequency">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Job" Relationship="Self.FK_Job_Frequency" FromRole="Frequency" ToRole="Job" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Endpoint" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="HourExecution" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdStatus" Type="Int32" Nullable="false" />
+          <Property Name="IdFrequency" Type="Int32" Nullable="false" />
+          <Property Name="IdRequestType" Type="Int32" Nullable="false" />
+          <Property Name="Monday" Type="Boolean" Nullable="false" />
+          <Property Name="Tuesday" Type="Boolean" Nullable="false" />
+          <Property Name="Wednesday" Type="Boolean" Nullable="false" />
+          <Property Name="Thursday" Type="Boolean" Nullable="false" />
+          <Property Name="Friday" Type="Boolean" Nullable="false" />
+          <Property Name="Saturday" Type="Boolean" Nullable="false" />
+          <Property Name="Sunday" Type="Boolean" Nullable="false" />
+          <Property Name="IdApplicationEnvironment" Type="Int32" Nullable="false" />
+          <Property Name="UseAuthentication" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ApplicationEnvironment" Relationship="Self.FK_Job_ApplicationEnvironment" FromRole="Job" ToRole="ApplicationEnvironment" />
+          <NavigationProperty Name="Frequency" Relationship="Self.FK_Job_Frequency" FromRole="Job" ToRole="Frequency" />
+          <NavigationProperty Name="RequestType" Relationship="Self.FK_Job_RequestType" FromRole="Job" ToRole="RequestType" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_Job_Status" FromRole="Job" ToRole="Status" />
+          <NavigationProperty Name="JobNotification" Relationship="Self.FK_JobNotification_Job" FromRole="Job" ToRole="JobNotification" />
+          <NavigationProperty Name="JobParameter" Relationship="Self.FK_JobParameter_Job" FromRole="Job" ToRole="JobParameter" />
+          <NavigationProperty Name="JobExecution" Relationship="DInTaskSchedulerModel.FK_JobExecution_Job" FromRole="Job" ToRole="JobExecution" />
+        </EntityType>
+        <EntityType Name="JobNotification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdJob" Type="Int32" Nullable="false" />
+          <Property Name="Mail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Job" Relationship="Self.FK_JobNotification_Job" FromRole="JobNotification" ToRole="Job" />
+        </EntityType>
+        <EntityType Name="JobParameter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PropertyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdPropertyType" Type="Int32" Nullable="false" />
+          <Property Name="IdJob" Type="Int32" Nullable="false" />
+          <Property Name="IdSpecialFunction" Type="Int32" />
+          <Property Name="IdParameterType" Type="Int32" Nullable="false" />
+          <Property Name="IdJobParameter" Type="Int32" />
+          <Property Name="Value" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Job" Relationship="Self.FK_JobParameter_Job" FromRole="JobParameter" ToRole="Job" />
+          <NavigationProperty Name="ParameterType" Relationship="Self.FK_JobParameter_ParameterType" FromRole="JobParameter" ToRole="ParameterType" />
+          <NavigationProperty Name="PropertyType" Relationship="Self.FK_JobParameter_PropertyType" FromRole="JobParameter" ToRole="PropertyType" />
+          <NavigationProperty Name="SpecialFunction" Relationship="Self.FK_JobParameter_SpecialFunction" FromRole="JobParameter" ToRole="SpecialFunction" />
+        </EntityType>
+        <EntityType Name="ParameterType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="JobParameter" Relationship="Self.FK_JobParameter_ParameterType" FromRole="ParameterType" ToRole="JobParameter" />
+        </EntityType>
+        <EntityType Name="PropertyType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="JobParameter" Relationship="Self.FK_JobParameter_PropertyType" FromRole="PropertyType" ToRole="JobParameter" />
+          <NavigationProperty Name="SpecialFunction" Relationship="Self.FK_SpecialFunction_PropertyType" FromRole="PropertyType" ToRole="SpecialFunction" />
+        </EntityType>
+        <EntityType Name="RequestType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Job" Relationship="Self.FK_Job_RequestType" FromRole="RequestType" ToRole="Job" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApiKey" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SecretKey" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Version" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SpecialFunction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IdPropertyType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="JobParameter" Relationship="Self.FK_JobParameter_SpecialFunction" FromRole="SpecialFunction" ToRole="JobParameter" />
+          <NavigationProperty Name="PropertyType" Relationship="Self.FK_SpecialFunction_PropertyType" FromRole="SpecialFunction" ToRole="PropertyType" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Application" Relationship="Self.FK_Application_Status" FromRole="Status" ToRole="Application" />
+          <NavigationProperty Name="ApplicationEnvironment" Relationship="Self.FK_ApplicationEnvironment_Status" FromRole="Status" ToRole="ApplicationEnvironment" />
+          <NavigationProperty Name="Job" Relationship="Self.FK_Job_Status" FromRole="Status" ToRole="Job" />
+        </EntityType>
+        <Association Name="FK_Application_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Application" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApplicationEnvironment_Application">
+          <End Role="Application" Type="Self.Application" Multiplicity="1" />
+          <End Role="ApplicationEnvironment" Type="Self.ApplicationEnvironment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApplicationEnvironment">
+              <PropertyRef Name="IdApplication" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApplicationEnvironment_Environment">
+          <End Role="Environment" Type="Self.Environment" Multiplicity="1" />
+          <End Role="ApplicationEnvironment" Type="Self.ApplicationEnvironment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Environment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApplicationEnvironment">
+              <PropertyRef Name="IdEnvironment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ApplicationEnvironment_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="ApplicationEnvironment" Type="Self.ApplicationEnvironment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApplicationEnvironment">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_ApplicationEnvironment">
+          <End Role="ApplicationEnvironment" Type="Self.ApplicationEnvironment" Multiplicity="1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationEnvironment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="IdApplicationEnvironment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Frequency">
+          <End Role="Frequency" Type="Self.Frequency" Multiplicity="1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Frequency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="IdFrequency" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_RequestType">
+          <End Role="RequestType" Type="Self.RequestType" Multiplicity="1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RequestType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="IdRequestType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobNotification_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="JobNotification" Type="Self.JobNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobNotification">
+              <PropertyRef Name="IdJob" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobParameter_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="JobParameter" Type="Self.JobParameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobParameter">
+              <PropertyRef Name="IdJob" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobParameter_ParameterType">
+          <End Role="ParameterType" Type="Self.ParameterType" Multiplicity="1" />
+          <End Role="JobParameter" Type="Self.JobParameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParameterType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobParameter">
+              <PropertyRef Name="IdParameterType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobParameter_PropertyType">
+          <End Role="PropertyType" Type="Self.PropertyType" Multiplicity="1" />
+          <End Role="JobParameter" Type="Self.JobParameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobParameter">
+              <PropertyRef Name="IdPropertyType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobParameter_SpecialFunction">
+          <End Role="SpecialFunction" Type="Self.SpecialFunction" Multiplicity="0..1" />
+          <End Role="JobParameter" Type="Self.JobParameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SpecialFunction">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobParameter">
+              <PropertyRef Name="IdSpecialFunction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpecialFunction_PropertyType">
+          <End Role="PropertyType" Type="Self.PropertyType" Multiplicity="1" />
+          <End Role="SpecialFunction" Type="Self.SpecialFunction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropertyType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SpecialFunction">
+              <PropertyRef Name="IdPropertyType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DInTaskSchedulerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Application" EntityType="Self.Application" />
+          <EntitySet Name="ApplicationEnvironment" EntityType="Self.ApplicationEnvironment" />
+          <EntitySet Name="Environment" EntityType="Self.Environment" />
+          <EntitySet Name="Frequency" EntityType="Self.Frequency" />
+          <EntitySet Name="Job" EntityType="Self.Job" />
+          <EntitySet Name="JobNotification" EntityType="Self.JobNotification" />
+          <EntitySet Name="JobParameter" EntityType="Self.JobParameter" />
+          <EntitySet Name="ParameterType" EntityType="Self.ParameterType" />
+          <EntitySet Name="PropertyType" EntityType="Self.PropertyType" />
+          <EntitySet Name="RequestType" EntityType="Self.RequestType" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" />
+          <EntitySet Name="SpecialFunction" EntityType="Self.SpecialFunction" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <AssociationSet Name="FK_Application_Status" Association="Self.FK_Application_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Application" EntitySet="Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApplicationEnvironment_Application" Association="Self.FK_ApplicationEnvironment_Application">
+            <End Role="Application" EntitySet="Application" />
+            <End Role="ApplicationEnvironment" EntitySet="ApplicationEnvironment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApplicationEnvironment_Environment" Association="Self.FK_ApplicationEnvironment_Environment">
+            <End Role="Environment" EntitySet="Environment" />
+            <End Role="ApplicationEnvironment" EntitySet="ApplicationEnvironment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ApplicationEnvironment_Status" Association="Self.FK_ApplicationEnvironment_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="ApplicationEnvironment" EntitySet="ApplicationEnvironment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_ApplicationEnvironment" Association="Self.FK_Job_ApplicationEnvironment">
+            <End Role="ApplicationEnvironment" EntitySet="ApplicationEnvironment" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Frequency" Association="Self.FK_Job_Frequency">
+            <End Role="Frequency" EntitySet="Frequency" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_RequestType" Association="Self.FK_Job_RequestType">
+            <End Role="RequestType" EntitySet="RequestType" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Status" Association="Self.FK_Job_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobNotification_Job" Association="Self.FK_JobNotification_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="JobNotification" EntitySet="JobNotification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobParameter_Job" Association="Self.FK_JobParameter_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="JobParameter" EntitySet="JobParameter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobParameter_ParameterType" Association="Self.FK_JobParameter_ParameterType">
+            <End Role="ParameterType" EntitySet="ParameterType" />
+            <End Role="JobParameter" EntitySet="JobParameter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobParameter_PropertyType" Association="Self.FK_JobParameter_PropertyType">
+            <End Role="PropertyType" EntitySet="PropertyType" />
+            <End Role="JobParameter" EntitySet="JobParameter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobParameter_SpecialFunction" Association="Self.FK_JobParameter_SpecialFunction">
+            <End Role="SpecialFunction" EntitySet="SpecialFunction" />
+            <End Role="JobParameter" EntitySet="JobParameter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpecialFunction_PropertyType" Association="Self.FK_SpecialFunction_PropertyType">
+            <End Role="PropertyType" EntitySet="PropertyType" />
+            <End Role="SpecialFunction" EntitySet="SpecialFunction" />
+          </AssociationSet>
+          <EntitySet Name="JobExecution" EntityType="DInTaskSchedulerModel.JobExecution" />
+          <AssociationSet Name="FK_JobExecution_Job" Association="DInTaskSchedulerModel.FK_JobExecution_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="JobExecution" EntitySet="JobExecution" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="JobExecution">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExecutionDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdJob" Type="Int32" Nullable="false" />
+          <Property Name="IsSuccess" Type="Boolean" Nullable="false" />
+          <Property Name="UrlEndpoint" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Response" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InitDateTime" Type="DateTime" Precision="3" />
+          <Property Name="EndDateTime" Type="DateTime" Precision="3" />
+          <Property Name="InProcess" Type="Boolean" Nullable="false" />
+          <Property Name="Finished" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Job" Relationship="DInTaskSchedulerModel.FK_JobExecution_Job" FromRole="JobExecution" ToRole="Job" />
+        </EntityType>
+        <Association Name="FK_JobExecution_Job">
+          <End Type="DInTaskSchedulerModel.Job" Role="Job" Multiplicity="1" />
+          <End Type="DInTaskSchedulerModel.JobExecution" Role="JobExecution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobExecution">
+              <PropertyRef Name="IdJob" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DInTaskSchedulerModelStoreContainer" CdmEntityContainer="DInTaskSchedulerEntities">
+          <EntitySetMapping Name="Application">
+            <EntityTypeMapping TypeName="DInTaskSchedulerModel.Application">
+              <MappingFragment StoreEntitySet="Application">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApplicationEnvironment">
+            <EntityTypeMapping TypeName="DInTaskSchedulerModel.ApplicationEnvironment">
+              <MappingFragment StoreEntitySet="ApplicationEnvironment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdApplication" ColumnName="IdApplication" />
+                <ScalarProperty Name="IdEnvironment" ColumnName="IdEnvironment" />
+                <ScalarProperty Name="EndpointUrlInfo" ColumnName="EndpointUrlInfo" />
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+                <ScalarProperty Name="ApiKey" ColumnName="ApiKey" />
+                <ScalarProperty Name="SecretKey" ColumnName="SecretKey" />
+                <ScalarProperty Name="EndpointUrlBase" ColumnName="EndpointUrlBase" />
+                <ScalarProperty Name="UrlEndpointLogin" ColumnName="UrlEndpointLogin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Environment">
+            <EntityTypeMapping TypeName="DInTaskSchedulerModel.Environment">
+              <MappingFragment StoreEntitySet="Environment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Frequency">
+            <EntityTypeMapping TypeName="DInTaskSchedulerModel.Frequency">
+              <MappingFragment StoreEntitySet="Frequency">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Job">
+            <EntityTypeMapping TypeName="DInTaskSchedulerModel.Job">
+              <MappingFragment StoreEntitySet="Job">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Endpoint" ColumnName="Endpoint" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="HourExecution" ColumnName="HourExecution" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+                <ScalarProperty Name="IdFrequency" ColumnName="IdFrequency" />
+                <ScalarProperty Name="IdRequestType" ColumnName="IdRequestType" />
+                <ScalarProperty Name="Monday" ColumnName="Monday" />
+                <ScalarProperty Name="Tuesday" ColumnName="Tuesday" />
+                <ScalarProperty Name="Wednesday" ColumnName="Wednesday" />
+                <ScalarProperty Name="Thursday" ColumnName="Thursday" />
+                <ScalarProperty Name="Friday" ColumnName="Friday" />
+                <ScalarProperty Name="Saturday" ColumnName="Saturday" />
+                <ScalarProperty Name="Sunday" ColumnName="Sunday" />
+                <ScalarProperty Name="IdApplicationEnvironment" ColumnName="IdApplicationEnvironment" />
+                <ScalarProperty Name="UseAuthentication" ColumnName="UseAuthentication" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobNotification">
+            <EntityTypeMapping TypeName="DInTaskSchedulerModel.JobNotification">
+              <MappingFragment StoreEntitySet="JobNotification">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdJob" ColumnName="IdJob" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobParameter">
+            <EntityTypeMapping TypeName="DInTaskSchedulerModel.JobParameter">
+              <MappingFragment StoreEntitySet="JobParameter">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="IdPropertyType" ColumnName="IdPropertyType" />
+                <ScalarProperty Name="IdJob" ColumnName="IdJob" />
+                <ScalarProperty Name="IdSpecialFunction" ColumnName="IdSpecialFunction" />
+                <ScalarProperty Name="IdParameterType" ColumnName="IdParameterType" />
+                <ScalarProperty Name="IdJobParameter" ColumnName="IdJobParameter" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParameterType">
+            <EntityTypeMapping TypeName="DInTaskSchedulerModel.ParameterType">
+              <MappingFragment StoreEntitySet="ParameterType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropertyType">
+            <EntityTypeMapping TypeName="DInTaskSchedulerModel.PropertyType">
+              <MappingFragment StoreEntitySet="PropertyType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequestType">
+            <EntityTypeMapping TypeName="DInTaskSchedulerModel.RequestType">
+              <MappingFragment StoreEntitySet="RequestType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="DInTaskSchedulerModel.Settings">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+                <ScalarProperty Name="ApiKey" ColumnName="ApiKey" />
+                <ScalarProperty Name="SecretKey" ColumnName="SecretKey" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SpecialFunction">
+            <EntityTypeMapping TypeName="DInTaskSchedulerModel.SpecialFunction">
+              <MappingFragment StoreEntitySet="SpecialFunction">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IdPropertyType" ColumnName="IdPropertyType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="DInTaskSchedulerModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobExecution">
+            <EntityTypeMapping TypeName="DInTaskSchedulerModel.JobExecution">
+              <MappingFragment StoreEntitySet="JobExecution">
+                <ScalarProperty Name="Finished" ColumnName="Finished" />
+                <ScalarProperty Name="InProcess" ColumnName="InProcess" />
+                <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
+                <ScalarProperty Name="InitDateTime" ColumnName="InitDateTime" />
+                <ScalarProperty Name="Response" ColumnName="Response" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="UrlEndpoint" ColumnName="UrlEndpoint" />
+                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+                <ScalarProperty Name="IdJob" ColumnName="IdJob" />
+                <ScalarProperty Name="ExecutionDateTime" ColumnName="ExecutionDateTime" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

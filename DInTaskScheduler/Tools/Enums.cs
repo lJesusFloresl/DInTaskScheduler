@@ -17,5 +17,11 @@ namespace DInTaskScheduler.Tools
             [Display(Name = "OPTIONS")]
             OPTIONS = 5
         }
+
+        public enum StatusCatalog
+        {
+            ACTIVE = 1,
+            INACTIVE = 2
+        }
     }
 }

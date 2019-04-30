@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="08cad94fb51d410cad0711bd3cd4f14f" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="DInTaskSchedulerModel.Application" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DInTaskSchedulerModel.ApplicationEnvironment" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DInTaskSchedulerModel.Environment" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DInTaskSchedulerModel.Frequency" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DInTaskSchedulerModel.Job" Width="1.5" PointX="7.5" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DInTaskSchedulerModel.JobNotification" Width="1.5" PointX="9.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DInTaskSchedulerModel.JobParameter" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DInTaskSchedulerModel.ParameterType" Width="1.5" PointX="10.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DInTaskSchedulerModel.PropertyType" Width="1.5" PointX="10.5" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DInTaskSchedulerModel.RequestType" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DInTaskSchedulerModel.Settings" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="DInTaskSchedulerModel.SpecialFunction" Width="1.5" PointX="10.5" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DInTaskSchedulerModel.Status" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <AssociationConnector Association="DInTaskSchedulerModel.FK_Application_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="DInTaskSchedulerModel.FK_ApplicationEnvironment_Application" ManuallyRouted="false" />
+        <AssociationConnector Association="DInTaskSchedulerModel.FK_ApplicationEnvironment_Environment" ManuallyRouted="false" />
+        <AssociationConnector Association="DInTaskSchedulerModel.FK_ApplicationEnvironment_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="DInTaskSchedulerModel.FK_Job_ApplicationEnvironment" ManuallyRouted="false" />
+        <AssociationConnector Association="DInTaskSchedulerModel.FK_Job_Frequency" ManuallyRouted="false" />
+        <AssociationConnector Association="DInTaskSchedulerModel.FK_Job_RequestType" ManuallyRouted="false" />
+        <AssociationConnector Association="DInTaskSchedulerModel.FK_Job_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="DInTaskSchedulerModel.FK_JobNotification_Job" ManuallyRouted="false" />
+        <AssociationConnector Association="DInTaskSchedulerModel.FK_JobParameter_Job" ManuallyRouted="false" />
+        <AssociationConnector Association="DInTaskSchedulerModel.FK_JobParameter_ParameterType" ManuallyRouted="false" />
+        <AssociationConnector Association="DInTaskSchedulerModel.FK_JobParameter_PropertyType" ManuallyRouted="false" />
+        <AssociationConnector Association="DInTaskSchedulerModel.FK_JobParameter_SpecialFunction" ManuallyRouted="false" />
+        <AssociationConnector Association="DInTaskSchedulerModel.FK_SpecialFunction_PropertyType" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DInTaskSchedulerModel.JobExecution" Width="1.5" PointX="9.75" PointY="16.625" />
+        <AssociationConnector Association="DInTaskSchedulerModel.FK_JobExecution_Job" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

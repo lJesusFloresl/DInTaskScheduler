@@ -28,10 +28,26 @@
 
         #endregion
 
+        #region Generic
+
+        public const string OK = "Ok";
+        public const string ERROR = "Error - {0}";
+
+        #endregion
+
         #region Messages
 
         public const string ERROR_API_UNAVAILABLE = "Cannot connect with DiBrave API, operation canceled";
         public const string ERROR_MAX_RETRY = "Maximum retries reached, operation canceled";
+        public const string ERROR_ENDPOINT_EXECUTION = "An error ocurred in job execution";
+
+        #endregion
+
+        #region Cron Expresions
+
+        public const string CRON_EXPR_EVERY_MINUTE = "0 * * ? * *";
+        public const string CRON_EXPR_EVERY_15_SECONDS = "0/15 * * ? * *";
+        public const string CRON_EXPR_EVERY_10_SECONDS = "0/10 * * ? * *";
 
         #endregion
     }

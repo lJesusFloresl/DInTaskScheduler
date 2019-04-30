@@ -92,7 +92,7 @@ namespace DInTaskSchedulerApi.Tools
         /// <typeparam name="T">Enumerator type</typeparam>
         /// <param name="description">Description attribute value</param>
         /// <returns>Enumerator</returns>
-        public static T ObtenerValorDesdeDescripcion<T>(string description)
+        public static T GetValueFromDescription<T>(string description)
         {
             var type = typeof(T);
 
