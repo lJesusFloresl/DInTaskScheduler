@@ -76,53 +76,6 @@ namespace DInTaskScheduler.Tools.DInServices
         }
 
         /// <summary>
-        /// Generate daily summary report
-        /// </summary>
-        /// <param name="model">Data for report generation</param>
-        /// <returns>ServerResponse with execution data</returns>
-        public async Task<ServerResponse> GenerateDailySummaryReport(DailySummaryReportFilterViewModel model)
-        {
-            ServerResponse result;
-
-            try
-            {
-                CheckToken();
-                this.httpClient.SetHeaders(tokenModel.Token);
-                var content = JsonConvert.SerializeObject(model);
-                var buffer = Encoding.UTF8.GetBytes(content);
-                var byteContent = new ByteArrayContent(buffer);
-                byteContent.Headers.ContentType = new MediaTypeHeaderValue(Constants.HTTP_MEDIA_TYPE);
-                var response = httpClient.PostAsync(Constants.API_ROUTE_REPORTING_DAILYSUMMARY, byteContent).GetAwaiter().GetResult();
-                if (response.StatusCode == HttpStatusCode.Unauthorized)
-                {
-                    this.tokenModel = null;
-                    this.tokenModel = GetCurrentToken();
-                    if (tryCounter < 3)
-                    {
-                        tryCounter++;
-                        return await GenerateDailySummaryReport(model);
-                    }
-                    else
-                    {
-                        tryCounter = 0;
-                        result = UtilsApi.ErrorResponse(Constants.ERROR_MAX_RETRY);
-                    }
-                }
-                else
-                {
-                    tryCounter = 0;
-                    result = await UtilsApi.GetServerResponse(response);
-                }
-            }
-            catch
-            {
-                result = UtilsApi.ErrorResponse(Constants.ERROR_API_UNAVAILABLE);
-            }
-
-            return result;
-        }
-
-        /// <summary>
         /// Execute any endpoint from API
         /// </summary>
         /// <param name="model">Endpoint execution data</param>

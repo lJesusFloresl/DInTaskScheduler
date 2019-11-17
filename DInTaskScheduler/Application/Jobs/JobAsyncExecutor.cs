@@ -1,11 +1,13 @@
 ﻿using DInTaskScheduler.Application.Services;
 using DInTaskScheduler.Domain.Contracts.Services;
+using DInTaskScheduler.Domain.ViewModels;
 using DInTaskScheduler.Infrastructure.AmbientContext;
 using DInTaskScheduler.Tools;
 using Quartz;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using static DInTaskScheduler.Tools.Enums;
 
 namespace DInTaskScheduler.Application.Jobs
 {
@@ -30,13 +32,16 @@ namespace DInTaskScheduler.Application.Jobs
                 jobExecutionService.ExecuteJob(job);
             });
 
-            //var executionEndpoint = new EndpointTaskViewModel()
-            //{
-            //    HttpMethod = HttpMethods.POST,
-            //    EndpointSufix = Constants.API_ROUTE_REPORTING_DAILYSUMMARY,
-            //    Body = new DailySummaryReportFilterViewModel(1, Utils.GetCurrentDate()
-            //        , "ljesusfloresl@gmail.com").ToJson()
-            //};
+            var executionEndpoint = new EndpointTaskViewModel()
+            {
+                HttpMethod = HttpMethods.POST,
+                EndpointSufix = Constants.API_ROUTE_REPORTING_DAILYSUMMARY,
+                Body = new DailySummaryReportFilterViewModel(1, Utils.GetCurrentDate()
+                    , "ljesusfloresl@gmail.com").ToJson()
+            };
+
+            Utils.PrintConsole("Executing DailySummaryReport");
+            TaskEndpointService.ExecuteEndpointTaskAsync(executionEndpoint);
 
             //taskList.Add(executionEndpoint);
 

@@ -16,7 +16,7 @@
         #region Api Routes
 
         public const string API_ROUTE_APP_LOGIN = "AppAuth/Login";
-        public const string API_ROUTE_REPORTING_DAILYSUMMARY = "Reporting/DailySummary";
+        public const string API_ROUTE_REPORTING_DAILYSUMMARY = "Job/Reporting/DailySummary";
 
         #endregion
 
